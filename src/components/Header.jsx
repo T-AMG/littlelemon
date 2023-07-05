@@ -3,10 +3,10 @@ import Nav from "./Nav";
 
 const Header = () => {
   return (
-    <>
-      <img />
+    <header>
+      <img src="/assets/logo.svg" alt="littlelemon logo" />
       <Nav />
-    </>
+    </header>
   );
 };
 

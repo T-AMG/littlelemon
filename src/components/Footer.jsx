@@ -2,11 +2,11 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <>
-      <img />
+    <footer>
+      <img src="assets/restaurant_chef_B.jpg" width="200px" height="150px" />
       <div>
+        Navigation
         <ul>
-          <li>Navigation</li>
           <li>Home</li>
           <li>About</li>
           <li>Menu</li>
@@ -14,7 +14,9 @@ const Footer = () => {
           <li>Order online</li>
         </ul>
       </div>
-    </>
+      <div>Contact</div>
+      <div>Social Media Links</div>
+    </footer>
   );
 };
 
