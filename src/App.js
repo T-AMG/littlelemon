@@ -5,11 +5,11 @@ import HomePage from "./screens/HomePage";
 
 function App() {
   return (
-    <>
+    <div className="main">
       <Header />
       <HomePage />
       <Footer />
-    </>
+    </div>
   );
 }
 
