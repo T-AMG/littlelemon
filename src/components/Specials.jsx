@@ -27,7 +27,9 @@ const Specials = () => {
     <div className="specials_container">
       <div className="specials_header">
         <h1>This Weeks Specials!</h1>
-        <a href="">Online Menu</a>
+        <a className="link_button" href="/">
+          Online Menu
+        </a>
       </div>
       <div className="specials">
         {specials.map((special, index) => (
