@@ -17,6 +17,15 @@ body {
   margin: auto;
   background-color: white;
 }
+.confirmation {
+  min-height: 90vh;
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #495e57;
+  color: white;
+}
 h1 {
   font-size: 40pt;
 }
@@ -222,7 +231,7 @@ form select {
   height: 30px;
   font-size: 16pt;
 }
-form input[type="submit"] {
+form Button {
   background-color: #f4ce14;
   font-size: 16pt;
   font-weight: 700;
@@ -230,6 +239,7 @@ form input[type="submit"] {
   border-width: 0px;
   border-radius: 16px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
 footer div {
@@ -250,4 +260,8 @@ footer div {
   color: white;
   background-color: #495e57;
   height: 25px;
+}
+span.error {
+  color: #ee9972;
+  text-align: left;
 }

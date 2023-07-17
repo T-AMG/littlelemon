@@ -4,8 +4,8 @@ const Rating = ({ rating }) => {
   return (
     <div className="rating">
       <div className="stars">
-        {[...Array(rating.rating)].map((star) => {
-          return <span class="fa fa-star checked"></span>;
+        {[...Array(rating.rating)].map((star, index) => {
+          return <span className="fa fa-star checked" key={index}></span>;
         })}
       </div>
       <div className="rating_name">

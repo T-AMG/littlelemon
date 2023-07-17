@@ -1,15 +1,61 @@
 import React, { useState } from "react";
 
-const BookingForm = ({ hours }) => {
+const BookingForm = ({ submitForm, availableTimes, dispatch }) => {
   const [values, setValues] = useState({
     date: "",
     resTime: "",
     guests: "",
     occasion: "",
+    errors: {},
   });
-  const [timeSlots, setTimeSlots] = useState(hours);
+
   const handleChange = (e) => {
+    if (e.target.name === "date") {
+      dispatch({ type: "select_date", payload: { date: e.target.value } });
+    }
     setValues((inputs) => ({ ...inputs, [e.target.name]: e.target.value }));
+  };
+
+  const validation = (values) => {
+    setValues({ ...values }, delete values.errors.date);
+    setValues({ ...values }, delete values.errors.guests);
+    setValues({ ...values }, delete values.errors.occasion);
+    setValues({ ...values }, delete values.errors.resTime);
+    if (values.date === "") {
+      setValues({ ...values }, (values.errors.date = "Please select a date!"));
+    }
+    if (values.resTime === "") {
+      setValues({ ...values }, (values.errors.resTime = "Please select time!"));
+    }
+    if (values.guests < 2 || values.guests > 10) {
+      setValues(
+        { ...values },
+        (values.errors.guests = "Number of guests must be between 2 and 10!! ")
+      );
+    }
+    if (values.occasion === "") {
+      setValues(
+        { ...values },
+        (values.errors.occasion = "PLease select the type of occasion ")
+      );
+    }
+    if (
+      values.errors.date != undefined ||
+      values.errors.guests != undefined ||
+      values.errors.occasion != undefined ||
+      values.errors.resTime != undefined
+    ) {
+      return false;
+    }
+    return true;
+  };
+  const submit = (e) => {
+    e.preventDefault();
+
+    if (validation(values)) {
+      console.log("validate!!");
+      submitForm(values);
+    }
   };
 
   return (
@@ -23,47 +69,45 @@ const BookingForm = ({ hours }) => {
           margin: "auto",
         }}
       >
-        <label for="res-date">Choose date</label>
-        <input
-          type="date"
-          id="res-date"
-          name="date"
-          value={values.date}
-          onChange={handleChange}
-        />
-        <label for="res-time">Choose time</label>
+        <label htmlFor="res-date">Choose date</label>
+        <input type="date" id="res-date" name="date" onChange={handleChange} />
+        <span className="error">{values.errors.date}</span>
+
+        <label htmlFor="res-time">Choose time</label>
         <select
+          data-testid="res-time "
           id="res-time "
           name="resTime"
-          value={values.resTime}
           onChange={handleChange}
         >
-          {timeSlots.map((hour) => (
-            <option>{hour}</option>
+          <option></option>
+          {availableTimes.map((timeSlot, index) => (
+            <option key={index}>{timeSlot}</option>
           ))}
         </select>
-        <label for="guests">Number of guests</label>
+        <span className="error">{values.errors.resTime}</span>
+
+        <label htmlFor="guests">Number of guests</label>
         <input
           type="number"
           placeholder="1"
-          min="1"
+          min="2"
           max="10"
           id="guests"
           name="guests"
-          value={values.guests}
+          required
           onChange={handleChange}
         />
-        <label for="occasion">Occasion</label>
-        <select
-          id="occasion"
-          name="occasion"
-          value={values.occasion}
-          onChange={handleChange}
-        >
+        <span className="error">{values.errors.guests}</span>
+
+        <label htmlFor="occasion">Occasion</label>
+        <select id="occasion" name="occasion" onChange={handleChange}>
+          <option></option>
           <option>Birthday</option>
           <option>Anniversary</option>
         </select>
-        <input type="submit" value="Make Your reservation" />
+        <span className="error">{values.errors.occasion}</span>
+        <button onClick={submit}>Submit Your reservation</button>
       </form>
     </div>
   );
