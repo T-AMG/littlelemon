@@ -36,7 +36,7 @@ const BookingForm = ({ submitForm, availableTimes, dispatch }) => {
     if (values.occasion === "") {
       setValues(
         { ...values },
-        (values.errors.occasion = "PLease select the type of occasion ")
+        (values.errors.occasion = "Please select the type of occasion ")
       );
     }
     if (
@@ -71,7 +71,9 @@ const BookingForm = ({ submitForm, availableTimes, dispatch }) => {
       >
         <label htmlFor="res-date">Choose date</label>
         <input type="date" id="res-date" name="date" onChange={handleChange} />
-        <span className="error">{values.errors.date}</span>
+        <span className="error" data-testid="date-error-message">
+          {values.errors.date}
+        </span>
 
         <label htmlFor="res-time">Choose time</label>
         <select
@@ -80,12 +82,16 @@ const BookingForm = ({ submitForm, availableTimes, dispatch }) => {
           name="resTime"
           onChange={handleChange}
         >
-          <option></option>
+          <option value="" disabled selected hidden>
+            -- Select your reservation time --
+          </option>
           {availableTimes.map((timeSlot, index) => (
             <option key={index}>{timeSlot}</option>
           ))}
         </select>
-        <span className="error">{values.errors.resTime}</span>
+        <span className="error" data-testid="time-error-message">
+          {values.errors.resTime}
+        </span>
 
         <label htmlFor="guests">Number of guests</label>
         <input
@@ -95,18 +101,30 @@ const BookingForm = ({ submitForm, availableTimes, dispatch }) => {
           max="10"
           id="guests"
           name="guests"
+          data-testid="number-guests"
           required
           onChange={handleChange}
         />
-        <span className="error">{values.errors.guests}</span>
+        <span className="error" data-testid="guests-error-message">
+          {values.errors.guests}
+        </span>
 
         <label htmlFor="occasion">Occasion</label>
-        <select id="occasion" name="occasion" onChange={handleChange}>
-          <option></option>
+        <select
+          id="occasion"
+          name="occasion"
+          onChange={handleChange}
+          data-testid="occasion"
+        >
+          <option value="" disabled selected hidden>
+            -- Choose the type of occasion --
+          </option>
           <option>Birthday</option>
           <option>Anniversary</option>
         </select>
-        <span className="error">{values.errors.occasion}</span>
+        <span className="error" data-testid="occasion-error-message">
+          {values.errors.occasion}
+        </span>
         <button onClick={submit}>Submit Your reservation</button>
       </form>
     </div>
