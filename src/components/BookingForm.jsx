@@ -40,10 +40,10 @@ const BookingForm = ({ submitForm, availableTimes, dispatch }) => {
       );
     }
     if (
-      values.errors.date != undefined ||
-      values.errors.guests != undefined ||
-      values.errors.occasion != undefined ||
-      values.errors.resTime != undefined
+      values.errors.date !== undefined ||
+      values.errors.guests !== undefined ||
+      values.errors.occasion !== undefined ||
+      values.errors.resTime !== undefined
     ) {
       return false;
     }

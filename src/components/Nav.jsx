@@ -10,21 +10,21 @@ const Nav = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <a href="/about">About</a>
+            <Link to="/about">About</Link>
           </li>
           <li>
-            <a href="/menu">Menu</a>
+            <Link to="/menu">Menu</Link>
           </li>
           <li>
-            <a href="/booking">Reservations</a>
+            <Link to="/booking">Reservations</Link>
           </li>
           <li>
-            <a href="/order" className="order">
+            <Link to="/booking" className="order">
               Order Online
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/login">Login</a>
+            <Link to="/login">Login</Link>
           </li>
         </ul>
       </nav>

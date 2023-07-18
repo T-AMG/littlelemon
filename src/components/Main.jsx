@@ -6,6 +6,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import BookingPage from "../screens/BookingPage";
 import { fetchAPI, submitAPI } from "../api";
 import ConfirmedBooking from "../screens/ConfirmedBooking";
+import { Link } from "react-router-dom";
 
 const Main = () => {
   const navigate = useNavigate();
@@ -36,10 +37,52 @@ const Main = () => {
   };
 
   const [availableTimes, dispatch] = useReducer(updateTimes, initializeTimes());
+  const openNav = () => {
+    const backdrop = document.getElementById("backdrop");
+
+    if (backdrop.style.display === "") {
+      backdrop.style.display = "block";
+      return;
+    }
+    if (backdrop.style.display === "none") {
+      backdrop.style.display = "block";
+      return;
+    }
+    if (backdrop.style.display === "block") {
+      backdrop.style.display = "none";
+      return;
+    }
+  };
 
   return (
     <>
-      <Header />
+      <Header openNav={openNav} />
+      <div className="backdrop" id="backdrop" onClick={openNav}>
+        <nav className="mobile header_nav " id="mobile_nav">
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/menu">Menu</Link>
+            </li>
+            <li>
+              <Link to="/booking">Reservations</Link>
+            </li>
+            <li>
+              <Link to="/booking" className="order">
+                Order Online
+              </Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route
@@ -54,7 +97,6 @@ const Main = () => {
         ></Route>
         <Route path="/confirmation" element={<ConfirmedBooking />}></Route>
       </Routes>
-
       <Footer />
     </>
   );
